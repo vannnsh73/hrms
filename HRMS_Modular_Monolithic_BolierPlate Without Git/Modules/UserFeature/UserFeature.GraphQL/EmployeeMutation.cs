@@ -1,0 +1,25 @@
+using HRMS.Shared.Application.DTOs;
+using HRMS.Shared.Application.GraphQL;
+using HotChocolate;
+using HotChocolate.Types;
+using MediatR;
+using UserFeature.Application.DTO;
+
+namespace UserFeature.GraphQL
+{
+    [ExtendObjectType(typeof(Mutation))]
+    public class EmployeeMutation
+    {
+        [GraphQLName("createEmployee")]
+        public async Task<BaseResponse<CreateEmployeeResponse>> CreateEmployeeAsync(CreateEmployeeRequest request, [Service] IMediator mediator)
+            => await mediator.Send(request);
+
+        [GraphQLName("updateEmployee")]
+        public async Task<BaseResponse<UpdateEmployeeResponse>> UpdateEmployeeAsync(UpdateEmployeeRequest request, [Service] IMediator mediator)
+            => await mediator.Send(request);
+
+        [GraphQLName("deleteEmployee")]
+        public async Task<BaseResponse<DeleteEmployeeResponse>> DeleteEmployeeAsync(DeleteEmployeeRequest request, [Service] IMediator mediator)
+            => await mediator.Send(request);
+    }
+}
